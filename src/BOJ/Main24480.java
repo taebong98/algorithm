@@ -50,7 +50,6 @@ public class Main24480 {
         for(int i =1; i<check.length; i++) {
             sb.append(check[i]).append("\n");
         }
-        System.out.println(graph);
         System.out.println(sb);
 
     }
