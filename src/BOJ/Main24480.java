@@ -1,64 +1,69 @@
 package BOJ;
 
-import java.io.BufferedReader;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.StringTokenizer;
+import java.io.*;
+import java.util.*;
 
 public class Main24480 {
+    static int N,M,R;
+    static ArrayList<ArrayList<Integer>> graph = new ArrayList<>(); // 정점들의 정보를 담을 배열
+    static int[] check; // 방문한 정점을 기록할 배열
+    static int count; // 방문 순서
 
-    static int N, M, R, cnt = 1;
-
-    static ArrayList<Integer> list[];
-    static int[] visited;
-
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) throws IOException{
         input();
-        test();
-//        DFS(R);
-//        for (int i = 1; i <= N; i++) {
-//            System.out.println(visited[i]);
-//        }
+//        System.out.println(Arrays.toString(check));
+
+
     }
 
-    private static void DFS(int start) {
-        visited[start] = cnt++;
-        for (Integer d : list[start]) {
-            if (visited[d] > 0)
-                continue;
-            DFS(d);
-        }
-    }
 
-    private static void test(){
-        System.out.println(list[1]);
-    }
-
-    private static void input() throws IOException {
-        System.setIn(new FileInputStream("src/input.txt"));
+    static void input() throws IOException{
+        System.setIn(new FileInputStream("src/BOJ/input.txt"));
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st = new StringTokenizer(br.readLine());
+        StringBuilder sb = new StringBuilder();
+
         N = Integer.parseInt(st.nextToken());
         M = Integer.parseInt(st.nextToken());
         R = Integer.parseInt(st.nextToken());
-        list = new ArrayList[N + 1];
-        visited = new int[N + 1];
-        for (int i = 1; i <= N; i++) {
-            list[i] = new ArrayList<>();
+
+        for(int i = 0; i<N+1; i ++) {
+            graph.add(new ArrayList<>());
         }
+
         for (int i = 0; i < M; i++) {
             st = new StringTokenizer(br.readLine());
-            int a = Integer.parseInt(st.nextToken());
-            int b = Integer.parseInt(st.nextToken());
-            list[a].add(b);
-            list[b].add(a);
+            int u = Integer.parseInt(st.nextToken());
+            int v = Integer.parseInt(st.nextToken());
+            graph.get(v).add(u);
+            graph.get(u).add(v);
         }
-        for (int i = 1; i <= N; i++) {
-            list[i].sort(Comparator.reverseOrder());
+
+        for(int i =1; i< graph.size(); i++){
+            Collections.sort(graph.get(i), Collections.reverseOrder());
+        }
+//        System.out.println(graph);
+        check = new int[N+1];
+
+        count=1;
+        dfs(R);
+        for(int i =1; i<check.length; i++) {
+            sb.append(check[i]).append("\n");
+        }
+        System.out.println(graph);
+        System.out.println(sb);
+
+    }
+    static void dfs(int R){
+        check[R] = count;
+
+        for(int i = 0; i<graph.get(R).size(); i++) {
+            int newVertex = graph.get(R).get(i);
+
+            if(check[newVertex]==0) {
+                count++;
+                dfs(newVertex);
+            }
         }
     }
-
 }
