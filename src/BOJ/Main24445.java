@@ -10,6 +10,8 @@ public class Main24445 {
 
     public static void main(String[] args) throws IOException {
         solution();
+        double a = Math.sqrt(2);
+        System.out.println(Math.round(a*100)/100.0);
     }
 
     public static void solution() throws IOException {
