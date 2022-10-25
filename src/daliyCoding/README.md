@@ -1,5 +1,32 @@
-##### 매일 알고리즘 문제 한 문제 이상 풀고 있습니다.
-##### 주로 아침시간을 이용해서 문제를 풀고 저녁시간에는 오전에 풀었던 문제를 정리하고 있습니다. <br>
-##### 최근 마크다운 문법을 공부했는데 이를 사용하여 문제의 풀이방법을 간단하게 정리해볼 계획입니다.
+# daliyCoding
 
-[최근 풀고있는 문제](https://github.com/taebong98/algorithm/tree/main/src/daliyCoding)
+### Main23
+#### Fibonacci Sequence Algorithm
+> <b>기본 재귀풀이
+```java
+public static int fibonacci(int num) {
+    if(num < 2) return num;
+    else return fibonacci(num -1) + fibonacci(num -2);
+    }
+```
+<br>
+
+><b> 동적계획법을 사용한 풀이
+피보나치 알고리즘에 동적 계획법을 쓰는 이유는 피보나치 알고리즘이 비효율적이기 때문이다. <br>
+fibonacci(7)을 구하기 위해서 5와 6을 구해야 하고 이를 구하는 것을 "부분 문제를 푼다" 라고 한다. <br>
+fibonacci(7)을 구할때 fibonacci(3)은 5번 등장한다.<br>
+이는 n이 커질수록 기하급수적으로 커지게 되고 부분문제가 너무 많이 중복된다는 단점이 있다.<br>
+<br>
+부분문제의 답을 계산할 캐시의 형태는 문제의 특성에 따라 다양하게 설정할 수 있는데, 이렇게 간단한 문제에서는 1차원 배열이면 충분하다. <br>
+<br>
+    
+> 동적계획법을 이용한 문제풀이 
+    
+```java
+public static int fibonacci (int num) {
+    if (num < 2) return num;
+    else if(memo[num] != 0) return memo[num];
+    else return memo[num] = fibonacci(num-1) + fibonacci(num-2);
+}
+```
+-------
