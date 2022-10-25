@@ -18,6 +18,10 @@ fibonacci(7)을 구할때 fibonacci(3)은 5번 등장한다.<br>
 이는 n이 커질수록 기하급수적으로 커지게 되고 부분문제가 너무 많이 중복된다는 단점이 있다.<br>
 <br>
 부분문제의 답을 계산할 캐시의 형태는 문제의 특성에 따라 다양하게 설정할 수 있는데, 이렇게 간단한 문제에서는 1차원 배열이면 충분하다. <br>
+<br>
+    
+> 동적계획법을 이용한 문제풀이 
+    
 ```java
 public static int fibonacci (int num) {
     if (num < 2) return num;
@@ -25,5 +29,4 @@ public static int fibonacci (int num) {
     else return memo[num] = fibonacci(num-1) + fibonacci(num-2);
 }
 ```
-
 -------
